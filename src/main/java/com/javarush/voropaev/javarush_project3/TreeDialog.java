@@ -15,42 +15,42 @@ public class TreeDialog {
     public void treeInit() {
         Question winQuestion = Question.builder()
                 .number(4)
-                .text("You have been returned home. You won!")
+                .text("Тебя вернули домай. Ты победил!")
                 .isWin(true)
                 .build();
         treeQuestions.put(4, winQuestion);
 
         Question lieQuestion1 = Question.builder()
                 .number(5)
-                .text("Your lies have been exposed. You lose!")
+                .text("Твою ложь разоблачили. Ты проиграл!")
                 .isLoose(true)
                 .build();
         treeQuestions.put(5, lieQuestion1);
 
         Question lieQuestion2 = Question.builder()
                 .number(6)
-                .text("You didn't negotiate. You lose!")
+                .text("Ты не пошёл на переговоры. Ты проиграл!")
                 .isLoose(true)
                 .build();
         treeQuestions.put(6, lieQuestion2);
 
         Question lieQuestion3 = Question.builder()
                 .number(7)
-                .text("You rejected the call. You lose!")
+                .text("Ты отклонил вызов. Ты проиграл!")
                 .isLoose(true)
                 .build();
         treeQuestions.put(7, lieQuestion3);
 
         Question question1 = Question.builder()
-                .text("You have climbed the bridge. Who are you?")
+                .text("Ты поднялся на мостик. Ты кто?")
                 .number(3)
                 .answers(List.of(
                         Answer.builder()
-                                .text("Tell the truth about yourself")
+                                .text("Рассказать правду о себе")
                                 .nextQuestion(4)
                                 .build(),
                         Answer.builder()
-                                .text("Lie about yourself")
+                                .text("Солгать о себе")
                                 .nextQuestion(5)
                                 .build()
                 ))
@@ -58,15 +58,15 @@ public class TreeDialog {
         treeQuestions.put(3, question1);
 
         Question question2 = Question.builder()
-                .text("You accepted the challenge. Are you going up to the captain's bridge?")
+                .text("Ты принял вызов. Поднимаешься на мостик к капитану?")
                 .number(2)
                 .answers(List.of(
                         Answer.builder()
-                                .text("Climb to the bridge")
+                                .text("Подняться на мостик")
                                 .nextQuestion(3)
                                 .build(),
                         Answer.builder()
-                                .text("Refuse to climb the bridge")
+                                .text("Отказаться подниматься на мостик")
                                 .nextQuestion(6)
                                 .build()
                 ))
@@ -79,11 +79,11 @@ public class TreeDialog {
                 .number(1)
                 .answers(List.of(
                         Answer.builder()
-                                .text("Take the challenge")
+                                .text("Принять вызов")
                                 .nextQuestion(2)
                                 .build(),
                         Answer.builder()
-                                .text("Reject a call")
+                                .text("Отклонить вызов")
                                 .nextQuestion(7)
                                 .build()
                 ))

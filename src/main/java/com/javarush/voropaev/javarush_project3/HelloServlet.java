@@ -39,14 +39,14 @@ public class HelloServlet extends HttpServlet {
                     }
                     else{
                         request.setAttribute("buttonYes", "hello-servlet?nextQ=1&answer=yes");
-                        request.setAttribute("answerYes", "Again...");
+                        request.setAttribute("answerYes", "Повторить");
                         request.setAttribute("buttonNo", "hello-servlet?nextQ=-1&answer=no");
-                        request.setAttribute("answerNo", "Next time...");
+                        request.setAttribute("answerNo", "В следующий раз...");
 
                     }
                 }
                 else{
-                    request.setAttribute("question", "Good bue!");
+                    request.setAttribute("question", "Пока!");
                 }
 
                 getServletContext().getRequestDispatcher("/game.jsp").forward(request, response);
