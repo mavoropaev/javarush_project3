@@ -23,11 +23,8 @@ public class HelloServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
 
-        //String startGame = request.getParameter("gameStatus");
         String nextQStr = request.getParameter("nextQ");
         int nextQ = Integer.parseInt(nextQStr);
-        //System.out.println("nextQ = " + nextQ);
-        //System.out.println(treeDialog.getQuestion(nextQ).text);
 
         try {
                 if (nextQ > 0) {
@@ -40,6 +37,13 @@ public class HelloServlet extends HttpServlet {
                         request.setAttribute("buttonNo", "hello-servlet?nextQ=" + nextQNo + "&answer=no");
                         request.setAttribute("answerNo", treeDialog.getQuestion(nextQ).answers.get(1).text);
                     }
+                    else{
+                        request.setAttribute("buttonYes", "hello-servlet?nextQ=1&answer=yes");
+                        request.setAttribute("answerYes", "Again...");
+                        request.setAttribute("buttonNo", "hello-servlet?nextQ=-1&answer=no");
+                        request.setAttribute("answerNo", "Next time...");
+
+                    }
                 }
                 else{
                     request.setAttribute("question", "Good bue!");
@@ -51,9 +55,6 @@ public class HelloServlet extends HttpServlet {
         catch (ServletException e) {
             throw new RuntimeException(e);
         }
-
-
-
     }
 
     public void destroy() {

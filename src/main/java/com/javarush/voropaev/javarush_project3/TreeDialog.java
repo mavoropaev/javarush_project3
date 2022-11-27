@@ -74,7 +74,8 @@ public class TreeDialog {
         treeQuestions.put(2, question2);
 
         Question question3 = Question.builder()
-                .text("You've lost your memory. Accept the UFO challenge?")
+                //.text("You've lost your memory. Accept the UFO challenge?")
+                .text("Ты потерял память. Принять вызов НЛО?")
                 .number(1)
                 .answers(List.of(
                         Answer.builder()
