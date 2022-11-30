@@ -1,28 +1,29 @@
 package com.javarush.voropaev.javarush_project3;
 
+import org.apache.logging.log4j.LogManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
-import java.util.List;
-import java.util.Scanner;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
-import static java.lang.System.out;
-import static java.lang.System.setOut;
-
 @WebServlet(name = "helloServlet", value = "/hello-servlet")
 public class HelloServlet extends HttpServlet {
+    private static final Logger logger = LoggerFactory.getLogger(HelloServlet.class);
     private String message;
     TreeDialog treeDialog = new TreeDialog();
 
     public void init() {
-        message = "Hello World!";
-        treeDialog.treeInit();
+        //treeDialog.treeInit();
+        treeDialog.treeInitJSON();
+        logger.info("init servlet");
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
-
+        logger.info("method doGet");
         String nextQStr = request.getParameter("nextQ");
         int nextQ = Integer.parseInt(nextQStr);
 
@@ -42,22 +43,24 @@ public class HelloServlet extends HttpServlet {
                         request.setAttribute("answerYes", "Повторить");
                         request.setAttribute("buttonNo", "hello-servlet?nextQ=-1&answer=no");
                         request.setAttribute("answerNo", "В следующий раз...");
-
                     }
+                    getServletContext().getRequestDispatcher("/game.jsp").forward(request, response);
                 }
                 else{
                     request.setAttribute("question", "Пока!");
+                    getServletContext().getRequestDispatcher("/gameover.jsp").forward(request, response);
+                    logger.info("game over");
                 }
-
-                getServletContext().getRequestDispatcher("/game.jsp").forward(request, response);
 
         }
         catch (ServletException e) {
+            logger.error("error message" + e.getMessage());
             throw new RuntimeException(e);
         }
     }
 
     public void destroy() {
+        logger.info("destroy servlet");
     }
 }
 

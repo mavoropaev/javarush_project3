@@ -15,7 +15,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h1 class="text-center text-white">Квест... Квест...Квест...</h1>
+                    <h1 class="text-center text-white">Квест! Квест! Квест!</h1>
                     <a href="hello-servlet?nextQ=1" class="itd_play">
                         <div class="itd_triangle"></div>
                     </a>

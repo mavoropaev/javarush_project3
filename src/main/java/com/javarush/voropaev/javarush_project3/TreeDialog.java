@@ -1,16 +1,87 @@
 package com.javarush.voropaev.javarush_project3;
 
 import lombok.Builder;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Scanner;
 
 public class TreeDialog {
+    private static final Logger logger = LoggerFactory.getLogger(TreeDialog.class);
     HashMap<Integer, Question> treeQuestions = new HashMap<>();
 
-    public Question getQuestion(int number){
-        return treeQuestions.get(number);
+    public Question getQuestion(int number) {
+        if (treeQuestions.containsKey(number)) {
+            return treeQuestions.get(number);
+        }
+        return null;
+    }
+    public void treeInitJSON(){
+        JSONParser parser = new JSONParser();
+
+        try(FileReader reader = new FileReader("C:\\Users\\mvoro\\IdeaProjects\\javarush_project3\\src\\main\\resources\\quest.json", StandardCharsets.UTF_8)) {
+            JSONObject questJSONObject = (JSONObject)parser.parse(reader);
+
+            JSONArray questionsJsonArray = (JSONArray)questJSONObject.get("quest");
+
+            for (Object itemQ : questionsJsonArray){
+                JSONObject questionJsonObject = (JSONObject) itemQ;
+
+                long numberQ = (Long) questionJsonObject.get("number");
+                String textQ = (String)questionJsonObject.get("text");
+
+                JSONArray answersJsonArray = (JSONArray) questionJsonObject.get("answers");
+                if (answersJsonArray != null) {
+                    List<Answer> answerListQ = new ArrayList<>();
+
+                    for (Object itemA : answersJsonArray) {
+                        JSONObject answerJsonObject = (JSONObject) itemA;
+
+                        String textA = (String) answerJsonObject.get("text");
+                        long nextQuestionA = (Long) answerJsonObject.get("nextQuestion");
+                        answerListQ.add(Answer.builder()
+                                .text(textA)
+                                .nextQuestion((int) nextQuestionA)
+                                .build());
+                    }
+
+                    boolean isWinQ = (boolean) questionJsonObject.get("isWin");
+                    boolean isLooseQ = (boolean) questionJsonObject.get("isLoose");
+
+                    treeQuestions.put((int) numberQ, Question.builder()
+                            .number((int) numberQ)
+                            .text(textQ)
+                            .answers(answerListQ)
+                            .isWin(isWinQ)
+                            .isLoose(isLooseQ)
+                            .build());
+                }
+                else{
+                    boolean isWinQ = (boolean) questionJsonObject.get("isWin");
+                    boolean isLooseQ = (boolean) questionJsonObject.get("isLoose");
+
+                    treeQuestions.put((int) numberQ, Question.builder()
+                            .number((int) numberQ)
+                            .text(textQ)
+                            .isWin(isWinQ)
+                            .isLoose(isLooseQ)
+                            .build());
+                }
+
+            }
+            logger.info("json parser - init tree questions");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
     public void treeInit() {
         Question winQuestion = Question.builder()
@@ -46,13 +117,13 @@ public class TreeDialog {
                 .number(3)
                 .answers(List.of(
                         Answer.builder()
-                                .text("Рассказать правду о себе")
-                                .nextQuestion(4)
-                                .build(),
+                            .text("Рассказать правду о себе")
+                            .nextQuestion(4)
+                            .build(),
                         Answer.builder()
-                                .text("Солгать о себе")
-                                .nextQuestion(5)
-                                .build()
+                            .text("Солгать о себе")
+                            .nextQuestion(5)
+                            .build()
                 ))
                 .build();
         treeQuestions.put(3, question1);
@@ -74,7 +145,6 @@ public class TreeDialog {
         treeQuestions.put(2, question2);
 
         Question question3 = Question.builder()
-                //.text("You've lost your memory. Accept the UFO challenge?")
                 .text("Ты потерял память. Принять вызов НЛО?")
                 .number(1)
                 .answers(List.of(
@@ -90,8 +160,8 @@ public class TreeDialog {
                 .build();
         treeQuestions.put(1, question3);
 
-    }
-    public void startGame(){
+        logger.info("tree question init");
+
     }
     @Builder
     static
