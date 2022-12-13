@@ -7,6 +7,7 @@ import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.nio.charset.StandardCharsets;
@@ -26,9 +27,13 @@ public class TreeDialog {
     }
     public void treeInitJSON(){
         JSONParser parser = new JSONParser();
+        File file = new File(
+                getClass().getClassLoader().getResource("quest.json").getFile()
+        );
 
-        try(FileReader reader = new FileReader("C:\\Users\\mvoro\\IdeaProjects\\javarush_project3\\src\\main\\resources\\quest.json", StandardCharsets.UTF_8)) {
-            JSONObject questJSONObject = (JSONObject)parser.parse(reader);
+        //try(FileReader reader = new FileReader("C:\\Users\\mvoro\\IdeaProjects\\javarush_project3\\src\\main\\resources\\quest.json", StandardCharsets.UTF_8)) {
+        try(FileReader reader = new FileReader(file, StandardCharsets.UTF_8)) {
+        JSONObject questJSONObject = (JSONObject)parser.parse(reader);
 
             JSONArray questionsJsonArray = (JSONArray)questJSONObject.get("quest");
 
