@@ -36,9 +36,8 @@ public class TreeDialog {
                 nameJson = "quest2.json";
                 break;
         }
-        File file = new File(
-                getClass().getClassLoader().getResource(nameJson).getFile()
-        );
+        File file = new File(getClass().getClassLoader().getResource(nameJson).getFile());
+        logger.info("get name json file ");
 
         try(FileReader reader = new FileReader(file, StandardCharsets.UTF_8)) {
         JSONObject questJSONObject = (JSONObject)parser.parse(reader);

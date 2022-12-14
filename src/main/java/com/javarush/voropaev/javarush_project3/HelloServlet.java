@@ -17,8 +17,6 @@ public class HelloServlet extends HttpServlet {
     TreeDialog treeDialog = new TreeDialog();
 
     public void init() {
-        //treeDialog.treeInitJSON();
-        //logger.info("init servlet");
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -36,8 +34,8 @@ public class HelloServlet extends HttpServlet {
                 if (nextQ > 0) {
                     request.setAttribute("question", treeDialog.getQuestion(nextQ).text);
                     if (!(treeDialog.getQuestion(nextQ).isLoose || treeDialog.getQuestion(nextQ).isWin)) {
-                        Random random = new Random();
 
+                        Random random = new Random();
                         int randomInt100 = 0;
                         while (randomInt100 == 0) {
                             randomInt100 = random.nextInt(100);
@@ -64,6 +62,7 @@ public class HelloServlet extends HttpServlet {
                 }
                 else if(nextQ == 0) {
                     getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+                    logger.info("game restart");
                 }
                 else{
                     request.setAttribute("question", "Пока!");

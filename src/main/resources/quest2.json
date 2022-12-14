@@ -82,6 +82,38 @@
     },
     {
       "number": 6,
+      "text": "Столица Хорватии",
+      "answers": [
+        {
+          "text": "Загреб",
+          "nextQuestion": 7
+        },
+        {
+          "text": "Лиссабон",
+          "nextQuestion": 106
+        }
+      ],
+      "isWin": false,
+      "isLoose": false
+    },
+    {
+      "number": 7,
+      "text": "Столица Словении",
+      "answers": [
+        {
+          "text": "Любляна",
+          "nextQuestion": 8
+        },
+        {
+          "text": "Братислава",
+          "nextQuestion": 106
+        }
+      ],
+      "isWin": false,
+      "isLoose": false
+    },
+    {
+      "number": 8,
       "text": "Ты восстановил память. Ты победил!",
       "isWin": true,
       "isLoose": false
@@ -113,6 +145,18 @@
     {
       "number": 105,
       "text": "Правильный ответ Хельсинки. Ты проиграл!",
+      "isWin": false,
+      "isLoose": true
+    },
+    {
+      "number": 106,
+      "text": "Правильный ответ Загреб. Ты проиграл!",
+      "isWin": false,
+      "isLoose": true
+    },
+    {
+      "number": 107,
+      "text": "Правильный ответ Любляна. Ты проиграл!",
       "isWin": false,
       "isLoose": true
     }
