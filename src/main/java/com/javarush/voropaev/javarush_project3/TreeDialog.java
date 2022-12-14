@@ -25,13 +25,21 @@ public class TreeDialog {
         }
         return null;
     }
-    public void treeInitJSON(){
+    public void treeInitJSON(int idQuest){
         JSONParser parser = new JSONParser();
+        String nameJson = "quest.json";
+        switch (idQuest){
+            case 1:
+                nameJson = "quest.json";
+                break;
+            case 2:
+                nameJson = "quest2.json";
+                break;
+        }
         File file = new File(
-                getClass().getClassLoader().getResource("quest.json").getFile()
+                getClass().getClassLoader().getResource(nameJson).getFile()
         );
 
-        //try(FileReader reader = new FileReader("C:\\Users\\mvoro\\IdeaProjects\\javarush_project3\\src\\main\\resources\\quest.json", StandardCharsets.UTF_8)) {
         try(FileReader reader = new FileReader(file, StandardCharsets.UTF_8)) {
         JSONObject questJSONObject = (JSONObject)parser.parse(reader);
 
@@ -86,88 +94,8 @@ public class TreeDialog {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
     }
-    public void treeInit() {
-        Question winQuestion = Question.builder()
-                .number(4)
-                .text("Тебя вернули домай. Ты победил!")
-                .isWin(true)
-                .build();
-        treeQuestions.put(4, winQuestion);
 
-        Question lieQuestion1 = Question.builder()
-                .number(5)
-                .text("Твою ложь разоблачили. Ты проиграл!")
-                .isLoose(true)
-                .build();
-        treeQuestions.put(5, lieQuestion1);
-
-        Question lieQuestion2 = Question.builder()
-                .number(6)
-                .text("Ты не пошёл на переговоры. Ты проиграл!")
-                .isLoose(true)
-                .build();
-        treeQuestions.put(6, lieQuestion2);
-
-        Question lieQuestion3 = Question.builder()
-                .number(7)
-                .text("Ты отклонил вызов. Ты проиграл!")
-                .isLoose(true)
-                .build();
-        treeQuestions.put(7, lieQuestion3);
-
-        Question question1 = Question.builder()
-                .text("Ты поднялся на мостик. Ты кто?")
-                .number(3)
-                .answers(List.of(
-                        Answer.builder()
-                            .text("Рассказать правду о себе")
-                            .nextQuestion(4)
-                            .build(),
-                        Answer.builder()
-                            .text("Солгать о себе")
-                            .nextQuestion(5)
-                            .build()
-                ))
-                .build();
-        treeQuestions.put(3, question1);
-
-        Question question2 = Question.builder()
-                .text("Ты принял вызов. Поднимаешься на мостик к капитану?")
-                .number(2)
-                .answers(List.of(
-                        Answer.builder()
-                                .text("Подняться на мостик")
-                                .nextQuestion(3)
-                                .build(),
-                        Answer.builder()
-                                .text("Отказаться подниматься на мостик")
-                                .nextQuestion(6)
-                                .build()
-                ))
-                .build();
-        treeQuestions.put(2, question2);
-
-        Question question3 = Question.builder()
-                .text("Ты потерял память. Принять вызов НЛО?")
-                .number(1)
-                .answers(List.of(
-                        Answer.builder()
-                                .text("Принять вызов")
-                                .nextQuestion(2)
-                                .build(),
-                        Answer.builder()
-                                .text("Отклонить вызов")
-                                .nextQuestion(7)
-                                .build()
-                ))
-                .build();
-        treeQuestions.put(1, question3);
-
-        logger.info("tree question init");
-
-    }
     @Builder
     static
     class Question{

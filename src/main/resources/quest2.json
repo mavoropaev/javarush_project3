@@ -1,0 +1,120 @@
+{
+  "quest":[
+    {
+      "number": 1,
+      "text": "Ты потерял память. Будем восстанавливать?",
+      "answers": [
+        {
+          "text": "Принять вызов",
+          "nextQuestion": 2
+        },
+        {
+          "text": "Отклонить вызов",
+          "nextQuestion": 101
+        }
+      ],
+      "isWin": false,
+      "isLoose": false
+    },
+    {
+      "number": 2,
+      "text": "Столица Франции?",
+      "answers": [
+        {
+          "text": "Париж",
+          "nextQuestion": 3
+        },
+        {
+          "text": "Марсель",
+          "nextQuestion": 102
+        }
+      ],
+      "isWin": false,
+      "isLoose": false
+    },
+    {
+      "number": 3,
+      "text": "Столица Греции",
+      "answers": [
+        {
+          "text": "Афины",
+          "nextQuestion": 4
+        },
+        {
+          "text": "Белград",
+          "nextQuestion": 103
+        }
+      ],
+      "isWin": false,
+      "isLoose": false
+    },
+    {
+      "number": 4,
+      "text": "Столица Швеции",
+      "answers": [
+        {
+          "text": "Стокгольм",
+          "nextQuestion": 5
+        },
+        {
+          "text": "Копенгаген",
+          "nextQuestion": 104
+        }
+      ],
+      "isWin": false,
+      "isLoose": false
+    },
+    {
+      "number": 5,
+      "text": "Столица Финляндии",
+      "answers": [
+        {
+          "text": "Хельсинки",
+          "nextQuestion": 6
+        },
+        {
+          "text": "Осло",
+          "nextQuestion": 105
+        }
+      ],
+      "isWin": false,
+      "isLoose": false
+    },
+    {
+      "number": 6,
+      "text": "Ты восстановил память. Ты победил!",
+      "isWin": true,
+      "isLoose": false
+    },
+    {
+      "number": 101,
+      "text": "Ты отклонил вызов. Ты проиграл!",
+      "isWin": false,
+      "isLoose": true
+    },
+    {
+      "number": 102,
+      "text": "Правильный ответ Париж. Ты проиграл!",
+      "isWin": false,
+      "isLoose": true
+    },
+    {
+      "number": 103,
+      "text": "Правильный ответ Афины. Ты проиграл!",
+      "isWin": false,
+      "isLoose": true
+    },
+    {
+      "number": 104,
+      "text": "Правильный ответ Стокгольм. Ты проиграл!",
+      "isWin": false,
+      "isLoose": true
+    },
+    {
+      "number": 105,
+      "text": "Правильный ответ Хельсинки. Ты проиграл!",
+      "isWin": false,
+      "isLoose": true
+    }
+  ]
+}

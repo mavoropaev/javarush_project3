@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.util.Random;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -16,14 +17,18 @@ public class HelloServlet extends HttpServlet {
     TreeDialog treeDialog = new TreeDialog();
 
     public void init() {
-        //treeDialog.treeInit();
-        treeDialog.treeInitJSON();
-        logger.info("init servlet");
+        //treeDialog.treeInitJSON();
+        //logger.info("init servlet");
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
         logger.info("method doGet");
+        String idQuestStr = request.getParameter("idQuest");
+        if (idQuestStr != null){
+            int idQuest = Integer.parseInt(idQuestStr);
+            treeDialog.treeInitJSON(idQuest);
+        }
         String nextQStr = request.getParameter("nextQ");
         int nextQ = Integer.parseInt(nextQStr);
 
@@ -31,20 +36,34 @@ public class HelloServlet extends HttpServlet {
                 if (nextQ > 0) {
                     request.setAttribute("question", treeDialog.getQuestion(nextQ).text);
                     if (!(treeDialog.getQuestion(nextQ).isLoose || treeDialog.getQuestion(nextQ).isWin)) {
-                        int nextQYes = treeDialog.getQuestion(nextQ).answers.get(0).nextQuestion;
-                        int nextQNo = treeDialog.getQuestion(nextQ).answers.get(1).nextQuestion;
+                        Random random = new Random();
+
+                        int randomInt100 = 0;
+                        while (randomInt100 == 0) {
+                            randomInt100 = random.nextInt(100);
+                        }
+                        int firstButton = randomInt100 < 50 ? 0 : 1;
+                        int secondButton = randomInt100 < 50 ? 1 : 0;
+
+                        int nextQYes = treeDialog.getQuestion(nextQ).answers.get(firstButton).nextQuestion;
+                        int nextQNo = treeDialog.getQuestion(nextQ).answers.get(secondButton).nextQuestion;
                         request.setAttribute("buttonYes", "hello-servlet?nextQ=" + nextQYes + "&answer=yes");
-                        request.setAttribute("answerYes", treeDialog.getQuestion(nextQ).answers.get(0).text);
+                        request.setAttribute("answerYes", treeDialog.getQuestion(nextQ).answers.get(firstButton).text);
                         request.setAttribute("buttonNo", "hello-servlet?nextQ=" + nextQNo + "&answer=no");
-                        request.setAttribute("answerNo", treeDialog.getQuestion(nextQ).answers.get(1).text);
+                        request.setAttribute("answerNo", treeDialog.getQuestion(nextQ).answers.get(secondButton).text);
+
                     }
                     else{
-                        request.setAttribute("buttonYes", "hello-servlet?nextQ=1&answer=yes");
+                        request.setAttribute("buttonYes", "hello-servlet?nextQ=0&answer=yes");
                         request.setAttribute("answerYes", "Повторить");
                         request.setAttribute("buttonNo", "hello-servlet?nextQ=-1&answer=no");
                         request.setAttribute("answerNo", "В следующий раз...");
                     }
                     getServletContext().getRequestDispatcher("/game.jsp").forward(request, response);
+
+                }
+                else if(nextQ == 0) {
+                    getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
                 }
                 else{
                     request.setAttribute("question", "Пока!");
