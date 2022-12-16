@@ -8,18 +8,19 @@
     <link rel="stylesheet" href="css/bootstrap.min.css" >
     <link rel="stylesheet" href="css/fontello.css">
     <link rel="stylesheet" href="css/style.css">
-    <title>Сборник квестов</title>
+    <title>Первый квест. Потеря памати.</title>
 </head>
+
 <body>
     <header>
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h1 class="text-center text-white">Квест! Квест! Квест!</h1>
+                    <h1 class="text-center text-white">${question}</h1>
                     <p></p>
-                    <a href="hello-servlet?idQuest=1&nextQ=1" class="btn btn-itd btn-lg text-uppercase">НЛО</a>
+                    <a href="${buttonYes}" class="btn btn-game btn-lg text-uppercase"> ${answerYes}</a>
                     <p></p>
-                    <a href="hello-servlet?idQuest=2&nextQ=1" class="btn btn-itd btn-lg text-uppercase">СТОЛИЦЫ</a>
+                    <a href="${buttonNo}" class="btn btn-game btn-lg text-uppercase"> ${answerNo}</a>
                 </div>
             </div>
         </div>

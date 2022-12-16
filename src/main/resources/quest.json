@@ -1,0 +1,76 @@
+{
+  "quest":[
+    {
+      "number": 1,
+      "text": "Ты потерял память. Принять вызов НЛО?",
+      "answers": [
+        {
+          "text": "Принять вызов",
+          "nextQuestion": 2
+        },
+        {
+          "text": "Отклонить вызов",
+          "nextQuestion": 7
+        }
+      ],
+      "isWin": false,
+      "isLoose": false
+    },
+    {
+      "number": 2,
+      "text": "Ты принял вызов. Поднимаешься на мостик к капитану?",
+      "answers": [
+        {
+          "text": "Подняться на мостик",
+          "nextQuestion": 3
+        },
+        {
+          "text": "Отказаться подниматься на мостик",
+          "nextQuestion": 6
+        }
+      ],
+      "isWin": false,
+      "isLoose": false
+    },
+    {
+      "number": 3,
+      "text": "Ты поднялся на мостик. Ты кто?",
+      "answers": [
+        {
+          "text": "Рассказать правду о себе",
+          "nextQuestion": 4
+        },
+        {
+          "text": "Солгать о себе",
+          "nextQuestion": 5
+        }
+      ],
+      "isWin": false,
+      "isLoose": false
+    },
+    {
+      "number": 4,
+      "text": "Тебя вернули домай. Ты победил!",
+      "isWin": true,
+      "isLoose": false
+    },
+    {
+      "number": 5,
+      "text": "Твою ложь разоблачили. Ты проиграл!",
+      "isWin": false,
+      "isLoose": true
+    },
+    {
+      "number": 6,
+      "text": "Ты не пошёл на переговоры. Ты проиграл!",
+      "isWin": false,
+      "isLoose": true
+    },
+    {
+      "number": 7,
+      "text": "Ты отклонил вызов. Ты проиграл!",
+      "isWin": false,
+      "isLoose": true
+    }
+  ]
+}
